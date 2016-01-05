@@ -1,5 +1,11 @@
 # arraystack.py
 
+class EmptyStackException(Exception):
+    pass
+
+class FullStackException(Exception):
+    pass
+
 class Arraystack:
     def __init__(self, capacity):
         self.__data = [0] * capacity
