@@ -10,7 +10,7 @@ namespace Ukonline.Datastructures
 		private readonly int capacity;  // Capacity of this stack
 
 		/// <summary>
-		/// Creates a new empty queue.
+		/// Creates a new empty stack.
 		/// </summary>
 		/// <param name="capacity">The capacity of the stack.</param>
 		public ArrayStack (int capacity)

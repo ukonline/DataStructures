@@ -10,6 +10,6 @@ namespace Ukonline.Datastructures
 		/// <summary>
 		/// Creates a new instance of this class.
 		/// </summary>
-		public EmptyStackException() : base ("Empty stack"){}
+		public EmptyStackException() : base ("Empty stack."){}
 	}
 }
