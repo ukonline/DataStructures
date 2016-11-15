@@ -110,6 +110,18 @@ namespace Ukonline.Datastructures.Tests
 		{
 			stack = new ArrayStack<int> (5);
 		}
+
+		[Test]
+		public void TestFullStack()
+		{
+			stack.Push (1);
+			stack.Push (2);
+			stack.Push (3);
+			stack.Push (4);
+			stack.Push (5);
+
+			Assert.Throws<FullStackException> (delegate { stack.Push (6); });
+		}
 	}
 
 	[TestFixture]
