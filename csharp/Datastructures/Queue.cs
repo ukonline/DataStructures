@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Queue.cs
+
+using System;
 
 namespace Ukonline.Datastructures
 {
