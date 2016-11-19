@@ -1,14 +1,12 @@
 ﻿// Queue.cs
 
-using System;
-
 namespace Ukonline.Datastructures
 {
 	/// Interface for the Queue ADT
 	public interface Queue<E>
 	{
 		/// <summary>
-		/// Gets the size of the queue
+		/// Gets the size of the queue.
 		/// </summary>
 		/// <returns>The number of elements contained in this queue.</returns>
 		int Size();
