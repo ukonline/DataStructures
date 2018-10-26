@@ -69,10 +69,3 @@ void stackFree(arraystack_t *stack)
 	free (stack->data);
 	free (stack);
 }
-
-int *Int (int opt)
-{
-	int *ret = malloc (sizeof (opt));
-	*ret = opt;
-	return ret;
-}

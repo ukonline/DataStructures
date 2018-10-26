@@ -68,10 +68,3 @@ void queueFree(arrayqueue_t *queue)
     free(queue->data);
     free(queue);
 }
-
-int *Int (int opt)
-{
-    int *ret = malloc(sizeof(opt));
-    *ret = opt;
-    return ret;
-}
