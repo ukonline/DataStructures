@@ -1,70 +1,67 @@
 // arrayqueue.c
 
-#include <stdio.h>
+#include "arrayqueue.h"
+
 #include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
 
-typedef struct queue {
-    void **data;
-    unsigned int front;
-    unsigned int rear;
-    unsigned int capacity;
-    unsigned int size;
-} arrayqueue_t;
-
-arrayqueue_t *queueNew(unsigned int capacity)
+arrayqueue_t *aq_new(unsigned int capacity)
 {
-    arrayqueue_t *queue = malloc(sizeof(arrayqueue_t));
-    queue->data = malloc(capacity * sizeof(void*));
-    queue->front = 0;
-    queue->rear = 0;
-    queue->capacity = capacity;
-    queue->size = 0;
-    return queue;
+    arrayqueue_t *q = malloc(sizeof(arrayqueue_t));
+    q->capacity = capacity;
+    q->data = malloc(capacity * sizeof(void*));
+    q->front = 0;
+    q->rear = 0;
+    q->full = false;
+    return q;
 }
 
-int queueSize(arrayqueue_t *queue)
+void aq_del(arrayqueue_t *q)
 {
-    return queue->size;
+    free(q->data);
+    free(q);
 }
 
-bool queueEmpty(arrayqueue_t *queue)
+int aq_size(arrayqueue_t *q)
 {
-    return queueSize(queue) == 0;
+    if (q->full)
+        return q->capacity;
+    return (q->capacity + q->rear - q->front) % q->capacity;
 }
 
-void *queueFront(arrayqueue_t *queue)
+bool aq_empty(arrayqueue_t *q)
 {
-    if (queueEmpty(queue))
+    return aq_size(q) == 0;
+}
+
+void *aq_front(arrayqueue_t *q)
+{
+    if (aq_empty(q))
         return NULL;
-    return queue->data + queue->front;
+    return q->data[q->front];
 }
 
-bool queueEnqueue (arrayqueue_t *queue, void *element)
+bool aq_enqueue(arrayqueue_t *q, void *element)
 {
-    if (queueSize(queue) == queue->capacity)
+    if (aq_size(q) == q->capacity)
         return false;
-    memcpy(queue->data + queue->rear, element, sizeof(element));
-    queue->rear = (queue->rear + 1) % queue->capacity;
-    queue->size += 1;
+//    memcpy(q->data + q->rear, element, sizeof(element));
+    q->data[q->rear] = element;
+    q->rear = (q->rear + 1) % q->capacity;
+    if (q->front == q->rear)
+        q->full = true;
     return true;
 }
 
-void *queueDequeue(arrayqueue_t *queue)
+void *aq_dequeue(arrayqueue_t *q)
 {
-    if (queueEmpty(queue))
+    if (aq_empty(q))
         return NULL;
-    void *element = malloc(sizeof(void*));
-    memcpy(element, queue->data + queue->front, sizeof(element));
-    queue->data[queue->front] = NULL;
-    queue->front = (queue->front + 1) % queue->capacity;
-    queue->size -= 1;
+//    void *element = malloc(sizeof(void*));
+//    memcpy(element, q->data + q->front, sizeof(element));
+    void *element = q->data[q->front];
+    q->data[q->front] = NULL;
+    q->front = (q->front + 1) % q->capacity;
+    if (q->full)
+        q->full = false;
     return element;
-}
-
-void queueFree(arrayqueue_t *queue)
-{
-    free(queue->data);
-    free(queue);
 }

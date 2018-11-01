@@ -1,4 +1,8 @@
-// weapper.c
+// wrapper.c
+
+#include "wrapper.h"
+
+#include <stdlib.h>
 
 int *Int(int val)
 {
