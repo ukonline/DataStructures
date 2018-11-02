@@ -33,7 +33,7 @@ $(OUT_DIR):
 lib: $(OUT_DIR) $(LOBJ)
 	ar rcs $(BDIR)/$(LIBNAME) $(LOBJ)
 
-test: lib $(TOBJ)
+tests: lib $(TOBJ)
 	$(CC) $(TOBJ) $(BDIR)/$(LIBNAME) -lcunit -o $(BDIR)/test
 	$(BDIR)/test
 
