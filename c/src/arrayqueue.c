@@ -37,15 +37,14 @@ void *aq_front(arrayqueue_t *q)
 {
     if (aq_empty(q))
         return NULL;
-    return q->data[q->front];
+    return *(q->data + q->front);
 }
 
 bool aq_enqueue(arrayqueue_t *q, void *element)
 {
     if (aq_size(q) == q->capacity)
         return false;
-//    memcpy(q->data + q->rear, element, sizeof(element));
-    q->data[q->rear] = element;
+    *(q->data + q->rear) = element;
     q->rear = (q->rear + 1) % q->capacity;
     if (q->front == q->rear)
         q->full = true;
@@ -56,10 +55,8 @@ void *aq_dequeue(arrayqueue_t *q)
 {
     if (aq_empty(q))
         return NULL;
-//    void *element = malloc(sizeof(void*));
-//    memcpy(element, q->data + q->front, sizeof(element));
-    void *element = q->data[q->front];
-    q->data[q->front] = NULL;
+    void *element = *(q->data + q->front);
+    *(q->data + q->front) = NULL;
     q->front = (q->front + 1) % q->capacity;
     if (q->full)
         q->full = false;
