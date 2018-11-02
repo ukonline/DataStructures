@@ -37,7 +37,7 @@ tests: lib $(TOBJ)
 	$(CC) $(TOBJ) $(BDIR)/$(LIBNAME) -lcunit -o $(BDIR)/test
 	$(BDIR)/test
 
-all: lib test
+all: lib tests
 
 .PHONY: clean
 
