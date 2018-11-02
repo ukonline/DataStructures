@@ -1,71 +1,56 @@
 // arraystack.c
 
-#include <stdio.h>
+#include "arraystack.h"
+
 #include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
 
-typedef struct stack
+arraystack_t *as_new(unsigned int capacity)
 {
-	void **data;
-	unsigned int top;
-	unsigned int capacity;
-} arraystack_t;
-
-arraystack_t *stackNew (unsigned int capacity)
-{
-	arraystack_t *stack = malloc (sizeof (arraystack_t));
-	stack->data = malloc (capacity * sizeof (void*));
-	stack->top = -1;
-	stack->capacity = capacity;
-	return stack;
+    arraystack_t *s = malloc(sizeof(arraystack_t));
+    s->capacity = capacity;
+    s->data = malloc(capacity * sizeof(void*));
+    s->top = -1;
+    return s;
 }
 
-unsigned int stackSize (arraystack_t *stack)
+void as_del(arraystack_t *s)
 {
-	return stack->top + 1;
+    free(s->data);
+    free(s);
 }
 
-bool stackEmpty (arraystack_t *stack)
+unsigned int as_size(arraystack_t *s)
 {
-	return stackSize (stack) == 0;
+    return s->top + 1;
 }
 
-void *stackTop (arraystack_t *stack)
+bool as_empty(arraystack_t *s)
 {
-	if (stackEmpty (stack))
-	{
-		return NULL;
-	}
-	return stack->data + stack->top;
+    return as_size(s) == 0;
 }
 
-bool stackPush (arraystack_t *stack, void *element)
+void *as_top(arraystack_t *s)
 {
-	if (stackSize (stack) == stack->capacity)
-	{
-		return false;
-	}
-	stack->top += 1;
-	memcpy (stack->data + stack->top, element, sizeof (element));
-	return true;
+    if (as_empty(s))
+        return NULL;
+    return *(s->data + s->top);
 }
 
-void *stackPop (arraystack_t *stack)
+bool as_push(arraystack_t *s, void *elem)
 {
-	if (stackEmpty(stack))
-	{
-		return NULL;
-	}
-	void *element = malloc (sizeof (void*));
-	memcpy (element, stack->data + stack->top, sizeof (element));
-	stack->data[stack->top] = NULL;
-	stack->top -= 1;
-	return element;
+    if (as_size(s) == s->capacity)
+        return false;
+    s->top += 1;
+    *(s->data + s->top) = elem;
+    return true;
 }
 
-void stackFree(arraystack_t *stack)
+void *as_pop(arraystack_t *s)
 {
-	free (stack->data);
-	free (stack);
+    if (as_empty(s))
+        return NULL;
+    void *element = *(s->data + s->top);
+    *(s->data + s->top) = NULL;
+    s->top -= 1;
+    return element;
 }
