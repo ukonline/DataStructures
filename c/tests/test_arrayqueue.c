@@ -58,6 +58,8 @@ void test_aq_size()
 
     aq_dequeue(q);
     CU_ASSERT_EQUAL(aq_size(q), 0);
+
+    aq_del(q);
 }
 
 void test_aq_empty()
@@ -75,6 +77,8 @@ void test_aq_empty()
     aq_enqueue(q, Int(2));
     aq_enqueue(q, Int(3));
     CU_ASSERT_EQUAL(aq_empty(q), false);
+
+    aq_del(q);
 }
 
 void test_aq_front()
@@ -94,6 +98,8 @@ void test_aq_front()
     CU_ASSERT_EQUAL(aq_dequeue(q), val[0]);
     CU_ASSERT_EQUAL(aq_front(q), val[1]);
     CU_ASSERT_EQUAL(aq_size(q), 1);
+
+    aq_del(q);
 }
 
 void test_aq_enqueue()
@@ -114,6 +120,8 @@ void test_aq_enqueue()
     CU_ASSERT_EQUAL(aq_enqueue(q, Int(4)), false);
     CU_ASSERT_EQUAL(aq_size(q), 3);
     CU_ASSERT_EQUAL(aq_front(q), val);
+
+    aq_del(q);
 }
 
 void test_aq_dequeue()
@@ -131,6 +139,8 @@ void test_aq_dequeue()
     aq_enqueue(q, Int(3));
 
     CU_ASSERT_EQUAL(aq_dequeue(q), val);
+
+    aq_del(q);
 }
 
 int main()
