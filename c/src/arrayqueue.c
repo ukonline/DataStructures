@@ -21,7 +21,7 @@ void aq_del(arrayqueue_t *q)
     free(q);
 }
 
-int aq_size(arrayqueue_t *q)
+unsigned int aq_size(arrayqueue_t *q)
 {
     if (q->full)
         return q->capacity;

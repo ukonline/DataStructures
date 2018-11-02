@@ -2,7 +2,7 @@
 
 IDIR=include
 CC=gcc
-CFLAGS=-I$(IDIR)
+CFLAGS=-I$(IDIR) -std=c99 -pedantic -Wall -O3 -Wshadow -Wextra -Werror
 
 SDIR=src
 TDIR=tests

@@ -43,7 +43,7 @@ void test_aq_size()
     CU_ASSERT_EQUAL(aq_size(q), 3);
     CU_ASSERT_EQUAL(q->full, true);
 
-    int *ret = aq_front(q);
+    aq_front(q);
     CU_ASSERT_EQUAL(aq_size(q), 3);
 
     aq_dequeue(q);

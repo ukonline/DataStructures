@@ -17,7 +17,7 @@ arrayqueue_t *aq_new(unsigned int c);
 
 void aq_del(arrayqueue_t *q);
 
-int aq_size(arrayqueue_t *q);
+unsigned int aq_size(arrayqueue_t *q);
 
 bool aq_empty(arrayqueue_t *q);
 

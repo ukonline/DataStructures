@@ -21,7 +21,7 @@ arraystack_t *stackNew (unsigned int capacity)
 	return stack;
 }
 
-int stackSize (arraystack_t *stack)
+unsigned int stackSize (arraystack_t *stack)
 {
 	return stack->top + 1;
 }
