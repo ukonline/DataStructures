@@ -143,16 +143,12 @@ void test_aq_dequeue()
     aq_del(q);
 }
 
-int main()
+CU_pSuite test_arrayqueue()
 {
     CU_pSuite pSuite = NULL;
 
-    if (CU_initialize_registry() != CUE_SUCCESS)
-        return CU_get_error();
-
     if ((pSuite = CU_add_suite("arrayqueue test suite", NULL, NULL)) == NULL) {
-        CU_cleanup_registry();
-        return CU_get_error();
+        return NULL;
     }
 
     if (CU_add_test(pSuite, "test of test_aq_new", test_aq_new) == NULL ||
@@ -163,13 +159,8 @@ int main()
         CU_add_test(pSuite, "test of test_aq_enqueue", test_aq_enqueue) == NULL ||
         CU_add_test(pSuite, "test of test_aq_dequeue", test_aq_dequeue) == NULL)
     {
-        CU_cleanup_registry();
-        return CU_get_error();
+        return NULL;
     }
 
-    CU_basic_set_mode(CU_BRM_VERBOSE);
-    CU_basic_run_tests();
-    CU_cleanup_registry();
-
-    return CU_get_error();
+    return pSuite;
 }
