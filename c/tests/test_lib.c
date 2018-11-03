@@ -10,7 +10,9 @@ int main()
     if (CU_initialize_registry() != CUE_SUCCESS)
         return CU_get_error();
 
-    if (test_arrayqueue() == NULL) {
+    if (test_arrayqueue() == NULL ||
+        test_arraystack() == NULL)
+    {
         CU_cleanup_registry();
         return CU_get_error();
     }
